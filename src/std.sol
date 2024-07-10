@@ -7,24 +7,25 @@
 
 // Basics
 
-type Proxy(t) = Unit
+type Unit;
+
+type Proxy[t] = Unit;
 
 // Type Classification
 
 // types that can be completely represented by a single stack slot
 class t:ValueTy {
-    function abs(Word) → t;
-    function rep(t) → Word;
-}
+    abs : Word -> t;
+    rep : t -> Word;
+};
 
 // Memory Layout
 
-function get_free_memory() -> Word {
-    let res;
-    assembly {
-        res := mload(0x40)
-    }
-    return res
+get_free_memory = {
+    let res : Word;
+    assembly{};
+//    assembly { res := mload(0x40) };
+    return res;
 }
 
 function set_free_memory(loc:Word) -> () {
