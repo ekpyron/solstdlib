@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    hm-typecheck.url = "github:d-xo/hm-typecheck?ref=nix";
+    solcore.url = "github:d-xo/solcore?ref=alex-happy-cabal";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -12,7 +12,9 @@
       pkgs = import ins.nixpkgs { inherit system; };
     in {
       devShells.default = pkgs.mkShell {
-        buildInputs = [ ins.hm-typecheck.packages.${system}.default ];
+        buildInputs = [
+          (pkgs.haskell.lib.dontCheck ins.solcore.packages.${system}.default)
+        ];
       };
     });
 }
